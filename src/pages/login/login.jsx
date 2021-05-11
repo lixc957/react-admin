@@ -4,9 +4,16 @@ import { Form, Icon, Input, Button } from 'antd'
 import './login.less'
 const Item = Form.Item // 不能写在import之前
 
-export default class Login extends Component {
-  handleSubmit = () => {}
+class Login extends Component {
+  handleSubmit = (e) => {
+    e.preventDefault()
+
+    const { getFieldsValue } = this.props.form
+    const values = getFieldsValue()
+    console.log(values);
+  }
   render() {
+    const { getFieldDecorator } = this.props.form
     return (
       <div className="login">
         <header className="login-header">
@@ -17,17 +24,26 @@ export default class Login extends Component {
           <h2>用户登陆</h2>
           <Form onSubmit={this.handleSubmit} className="login-form">
             <Item>
-              <Input
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="用户名"
-              />
+              {
+                getFieldDecorator('username')(
+                  <Input
+                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    placeholder="用户名"
+                  />
+                )
+              }             
             </Item>
             <Form.Item>
-              <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="password"
-                placeholder="密码"
-              />
+              {
+                getFieldDecorator('password')(
+                  <Input
+                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    type="password"
+                    placeholder="密码"
+                    autoComplete="off"
+                  />
+                )
+              }            
             </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit" className="login-form-button">
@@ -40,3 +56,5 @@ export default class Login extends Component {
     )
   }
 }
+
+export default Form.create({ name: 'login' })(Login)
