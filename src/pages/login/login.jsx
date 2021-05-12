@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Form, Icon, Input, Button, message } from 'antd'
+import { Redirect } from 'react-router-dom'
 import { apiLogin } from '../../api/login'
+import { setLocalStorage, getLocalStorage } from '../../utils'
 
 import './login.less'
 const Item = Form.Item // 不能写在import之前
@@ -16,6 +18,7 @@ class Login extends Component {
         try {
           const res = await apiLogin({ username, password })
           message.success('登陆成功!')
+          setLocalStorage('userInfo', res.data)
           this.props.history.replace('/')
         } catch (err) {
           message.error(err.msg)
@@ -44,6 +47,8 @@ class Login extends Component {
     // callback('xxxx') // 验证失败, 并指定提示的文本
   }
   render() {
+    const userInfo = getLocalStorage('userInfo')
+    if (userInfo) return <Redirect to='/' />
     const { getFieldDecorator } = this.props.form
     return (
       <div className="login">
