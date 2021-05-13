@@ -31,7 +31,7 @@ export default class Admin extends Component {
           <Header />
           <Content style={{ margin: 20, backgroundColor: '#fff' }}>
             <Switch>
-              
+              <Redirect exact from='/' to='/home'/>
               <Route path='/home' component={Home}/>
               <Route path='/category' component={Category}/>
               <Route path='/product' component={Product}/>
@@ -41,8 +41,7 @@ export default class Admin extends Component {
               <Route path="/charts/pie" component={Pie}/>
               <Route path="/charts/line" component={Line}/>
               <Route path="/order" component={Order}/>
-              <Route component={NotFound}/>
-              <Redirect from='/' to='/home'/>
+              <Route component={NotFound}/>              
             </Switch>
           </Content>
           <Footer style={{ textAlign: 'center', color: '#cccccc' }}>
