@@ -75,7 +75,7 @@ class LeftNav extends Component {
         if (cItem) {
           this.openKey = item.key
         }
-        
+
         pre.push(
           <SubMenu
             key={item.key}
@@ -93,6 +93,7 @@ class LeftNav extends Component {
       return pre
     }, [])
   }
+
   render() {
     const { pathname } = this.props.location
 
