@@ -1,5 +1,4 @@
 import { axios } from './axios'
-import { message } from 'antd'
 import jsonp from 'jsonp'
 
 export function apiGetWeather(city) {
@@ -18,5 +17,31 @@ export function apiGetWeather(city) {
         message.error('获取天气信息失败!')
       } */
     })
+  })
+}
+
+// 获取一级或某个二级分类列表
+export function apiGetCategoryList(parentId) {
+  return axios({
+    url: '/manage/category/list',
+    params: { parentId }
+  })
+}
+
+// 添加分类
+export function apiCategoryAdd({ parentId, categoryName }) {
+  return axios({
+    url: '/manage/category/add',
+    method: 'post',
+    data: { parentId, categoryName }
+  })
+}
+
+// 更新分类
+export function apiCategoryUpdate({ categoryId, categoryName }) {
+  return axios({
+    url: '/manage/category/update',
+    method: 'post',
+    data: { categoryId, categoryName }
   })
 }
