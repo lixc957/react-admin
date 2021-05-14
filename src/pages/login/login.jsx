@@ -13,7 +13,8 @@ class Login extends Component {
     e.preventDefault()
 
     this.props.form.validateFields(async (err, values) => {
-      if (!err) { // 校验通过
+      if (!err) {
+        // 校验通过
         const { username, password } = values
         try {
           const res = await apiLogin({ username, password })
@@ -48,7 +49,7 @@ class Login extends Component {
   }
   render() {
     const userInfo = getLocalStorage('userInfo')
-    if (userInfo) return <Redirect to='/' />
+    if (userInfo) return <Redirect to="/" />
     const { getFieldDecorator } = this.props.form
     return (
       <div className="login">

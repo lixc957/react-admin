@@ -3,7 +3,9 @@ export function setLocalStorage(name, value) {
 }
 
 export function getLocalStorage(name) {
-  return localStorage.getItem(name) ? JSON.parse(localStorage.getItem(name)) : undefined
+  let v = localStorage.getItem(name)
+  let falg = (v.substr(0, 1) === '{' && v.substr(-1, 1) === '}') || (v.substr(0, 1) === '[' && v.substr(-1, 1) === ']')
+  return v !== 'undefined' ? (falg ? JSON.parse(v) : v) : undefined
 }
 
 export function removeLocalStorage(name) {
